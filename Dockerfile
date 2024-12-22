@@ -3,7 +3,7 @@ FROM golang:1.22 as builder
 
 WORKDIR /app
 COPY . .
-RUN go build -o speedtest-exporter
+RUN CGO_ENABLED=0 go build -o speedtest-exporter
 
 # Create an image
 FROM alpine:latest
