@@ -12,4 +12,4 @@ WORKDIR /root/
 COPY --from=builder /app/speedtest-exporter .
 EXPOSE 8080
 
-CMD ["./speedtest-exporter"]
+CMD ["/root/speedtest-exporter"]
