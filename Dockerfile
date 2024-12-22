@@ -8,8 +8,8 @@ RUN go build -o speedtest-exporter
 # Create an image
 FROM alpine:latest
 RUN apk add --no-cache speedtest-cli
-WORKDIR /root/
+WORKDIR /app/
 COPY --from=builder /app/speedtest-exporter .
 EXPOSE 8080
 
-CMD ["/root/speedtest-exporter"]
+CMD ["/app/speedtest-exporter"]
