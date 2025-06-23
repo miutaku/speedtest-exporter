@@ -24,3 +24,5 @@ speedtest_ping_ms 9.142
 # TYPE speedtest_upload_speed_mbps gauge
 speedtest_upload_speed_mbps 198.71385496437676
 ```
+
+![image](https://github.com/user-attachments/assets/82888b91-0b71-44a2-910d-74229280112f)
