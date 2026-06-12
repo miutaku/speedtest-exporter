@@ -100,14 +100,36 @@ func getServerList() []string {
 	return ids
 }
 
-// serverID が空文字の場合はデフォルトサーバを使用する
 func runSpeedtest(serverID string) (*SpeedTestResult, error) {
-	args := []string{"--json", "--secure"}
 	if serverID != "" {
-		args = append(args, "--server", serverID)
+		return runSpeedtestByID(serverID)
 	}
 
+	args := []string{"--json", "--secure"}
+
 	cmd := exec.Command("speedtest", args...)
+	var out, stderr bytes.Buffer
+	cmd.Stdout = &out
+	cmd.Stderr = &stderr
+
+	if err := cmd.Run(); err != nil {
+		log.Printf("Speedtest failed (server=%q): %v\nStderr: %s", serverID, err, stderr.String())
+		return nil, err
+	}
+
+	log.Printf("Speedtest output (server=%q): %s", serverID, out.String())
+
+	var result SpeedTestResult
+	if err := json.Unmarshal(out.Bytes(), &result); err != nil {
+		log.Printf("JSON parse error: %v", err)
+		return nil, err
+	}
+
+	return &result, nil
+}
+
+func runSpeedtestByID(serverID string) (*SpeedTestResult, error) {
+	cmd := exec.Command("python3", "/app/speedtest_by_id.py", serverID)
 	var out, stderr bytes.Buffer
 	cmd.Stdout = &out
 	cmd.Stderr = &stderr

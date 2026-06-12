@@ -10,6 +10,7 @@ FROM alpine:latest
 RUN apk add --no-cache speedtest-cli
 WORKDIR /app/
 COPY --from=builder /app/speedtest-exporter .
+COPY --from=builder /app/speedtest_by_id.py .
 EXPOSE 8080
 
 ENTRYPOINT ["/app/speedtest-exporter"]
