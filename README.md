@@ -19,7 +19,7 @@ Or pin multiple speedtest.net server IDs and decide the exported metrics from
 the successful results:
 
 ```shell
-speedtest-exporter --servers=24333,48463,8407 --aggregation=best
+speedtest-exporter --servers=24333,48463,56935 --aggregation=best
 ```
 
 Aggregation modes:
