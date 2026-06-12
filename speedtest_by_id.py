@@ -46,7 +46,7 @@ def main():
         print(f"server ID {server_id} was not found in speedtest.net API", file=sys.stderr)
         return 1
 
-    client = speedtest.Speedtest(secure=False)
+    client = speedtest.Speedtest(secure=True)
     client.servers = {server["d"]: [server]}
     best = client.get_best_server()
     download = client.download()
