@@ -12,4 +12,4 @@ WORKDIR /app/
 COPY --from=builder /app/speedtest-exporter .
 EXPOSE 8080
 
-CMD ["/app/speedtest-exporter"]
+ENTRYPOINT ["/app/speedtest-exporter"]
