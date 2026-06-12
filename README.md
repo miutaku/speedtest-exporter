@@ -9,6 +9,29 @@ It is a prometheus exporter that checks the quality of your connection using spe
 
 # Usage
 
+Run with the default speedtest.net server selection:
+
+```shell
+speedtest-exporter
+```
+
+Or pin multiple speedtest.net server IDs and decide the exported metrics from
+the successful results:
+
+```shell
+speedtest-exporter --servers=24333,75170,14623 --aggregation=best
+```
+
+Aggregation modes:
+
+- `best` (default): maximum download/upload and minimum ping.
+- `average` or `avg`: average download/upload/ping.
+- `median`: median download/upload/ping.
+- `worst`: minimum download/upload and maximum ping.
+
+When multiple servers are specified, failed servers are skipped. Metrics are not
+updated only when every server fails.
+
 ```shell
 (*>△<)< curl http://127.0.0.1:8080/metrics | grep "speedtest_"
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
